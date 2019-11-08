@@ -12,10 +12,11 @@ import org.json.JSONObject;
 
 public class IntuitYelpAPI {
 
-    public static void YelpAPI(String location,int miles, int top){
+    public static void getTopRestaurantsByLocation(String location,int miles, int top){
         try {
             int meters = 1609*miles;
             //setting up the URL with parameters.
+            System.out.println("Sending the request to the Yelp API for top "+top+" restaurants near "+location+" in "+miles+" miles.");
             URL url = new URL("https://api.yelp.com/v3/businesses/search?location="+location+"&radius="+meters+"&sort_by=review_count&limit="+top);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -60,6 +61,7 @@ public class IntuitYelpAPI {
             }
 
             //writing the response to the answer.json file.
+            System.out.println("Writing the results to answer.json file.");
             try (FileWriter file = new FileWriter("/Users/arishdhingra/IdeaProjects/Intuit/src/com/company/answer.json")) {
                 file.write(list1.toString());
                 file.flush();
@@ -77,8 +79,8 @@ public class IntuitYelpAPI {
         }
     }
 
-    public static void main(String[] args) throws MalformedURLException {
-        YelpAPI("Sunnyvale",5,5);
+    public static void main(String[] args) {
+        getTopRestaurantsByLocation("Chicago",10,5);
     }
 }
 
