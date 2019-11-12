@@ -30,6 +30,9 @@ public class IntuitYelpAPI {
                 throw new RuntimeException("Failed : HTTP error code : "
                         + conn.getResponseCode());
             }
+            else{
+                System.out.println("Response received, cleaning up the response.");
+            }
 
             //capturing the response and appending it to the response string.
             BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -80,7 +83,7 @@ public class IntuitYelpAPI {
     }
 
     public static void main(String[] args) {
-        getTopRestaurantsByLocation("Chicago",10,5);
+        getTopRestaurantsByLocation("Indianapolis",20,50);
     }
 }
 
